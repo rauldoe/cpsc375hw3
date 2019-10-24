@@ -36,14 +36,14 @@ data$cluster <- as.factor(data$cluster)
 # i. What is the contingency table of your clustering? 
 # (Note: you can arbitrarily assign cluster 1/2 to Benign/Malignant) 
 
-# cluster = 1, class == "B"
-k1M <- nrow(data %>% filter(cluster == 1 & Class == "M"))
-k1B <- nrow(data %>% filter(cluster == 1 & Class == "B"))
+# class == "B", cluster = 1
+kM1 <- nrow(data %>% filter(Class == "M" & cluster == 1))
+kB1 <- nrow(data %>% filter(Class == "B" & cluster == 1))
 
-# cluster = 1, class == "M"
-k2M <- nrow(data %>% filter(cluster == 2 & Class == "M"))
-k2B <- nrow(data %>% filter(cluster == 2 & Class == "B"))
+# class == "M", cluster = 2
+kM2 <- nrow(data %>% filter(Class == "M" & cluster == 2))
+kB2 <- nrow(data %>% filter(Class == "B" & cluster == 2))
 
-contingencyTable <- matrix(c(c(k1M, k1B), c(k2M, k2B)), nrow = 2, ncol = 2)
-colnames(contingencyTable) <- c("M", "B")
-rownames(contingencyTable) <- paste("Cluster", c(1, 2))
+contingencyTable <- matrix(c(c(kM1, kB1), c(kM2, kB2)), nrow = 2, ncol = 2)
+colnames(contingencyTable) <- paste("Predicted/Cluster", sep = "", c(1, 2))
+rownames(contingencyTable) <- paste("Actual/", sep = "", c("M", "B"))
